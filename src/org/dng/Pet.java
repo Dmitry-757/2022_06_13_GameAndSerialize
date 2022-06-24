@@ -7,13 +7,22 @@ public class Pet implements Serializable {
     @Serial
     private static final long serialVersionUID = 4L;
 
+    private String name;
     private int health = 100;
     private int hungry = 0;
     private int happiness = 50;
     private boolean isAnabiosis;
 
+    public Pet(String name) {
+        this.name = name;
+    }
 
     public void test(){
+        if (hungry > 100){
+            health -= (hungry - 100);
+            hungry = 100;
+        }
+
         if(health <= 20){
             isAnabiosis = true;
             System.out.println("Pet is in anabiosis - need reanimation!");
@@ -33,10 +42,7 @@ public class Pet implements Serializable {
         }
         hungry += 10;
         happiness -= 10;
-        if (hungry > 100){
-            health = (hungry - 100);
-            hungry = 100;
-        }
+        test();
     }
 
 
@@ -45,9 +51,9 @@ public class Pet implements Serializable {
             System.out.println("Pet is in anabiosis - need reanimation!");
             return;
         }
-        hungry = Math.min(0, (hungry -= 10));
-        health = Math.max(100, (health+=10));
-        happiness += 10;
+        hungry = Math.max(0, (hungry -= 20));
+        health = Math.min(100, (health+=10));
+        happiness = Math.min(100, (happiness += 10));
         test();
     }
 
@@ -56,9 +62,9 @@ public class Pet implements Serializable {
             System.out.println("Pet is in anabiosis - need reanimation!");
             return;
         }
-        hungry += 10;
-        health = Math.max(100, (health+=5));
-        happiness += 10;
+        hungry += 15;
+        health = Math.min(100, (health+=5));
+        happiness = Math.min(100, (happiness += 10));
         test();
     }
 
@@ -67,11 +73,31 @@ public class Pet implements Serializable {
             System.out.println("Pet is in anabiosis - need reanimation!");
             return;
         }
-        hungry += 5;
-        health = Math.max(100, (health+=5));
-        happiness += 5;
+        hungry += 10;
+        health = Math.min(100, (health+=5));
+        happiness = Math.min(100, (happiness += 5));
         test();
     }
 
+    public void resurrection(){
+        if (isAnabiosis){
+            health = 100;
+            hungry = 0;
+            happiness = 50;
+            isAnabiosis = false;
+            System.out.println(name+" is resurrected! ))");
+        }
+    }
 
+
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "name='" + name + '\'' +
+                ", health=" + health +
+                ", hungry=" + hungry +
+                ", happiness=" + happiness +
+                ", isAnabiosis=" + isAnabiosis +
+                '}';
+    }
 }
