@@ -32,7 +32,7 @@ public class Pet implements Serializable {
             return;
         }
         hungry += 10;
-        happiness -= hungry;
+        happiness -= 10;
         if (hungry > 100){
             health = (hungry - 100);
             hungry = 100;
