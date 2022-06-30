@@ -186,7 +186,4 @@ class PetTest {
 
     }
 
-    @org.junit.jupiter.api.Test
-    void resurrection() {
-    }
 }
