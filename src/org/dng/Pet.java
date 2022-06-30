@@ -2,12 +2,15 @@ package org.dng;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Pet implements Serializable {
     @Serial
     private static final long serialVersionUID = 4L;
 
     private String name;
+
+
     private int health = 100;
     private int hungry = 0;
     private int happiness = 50;
@@ -100,4 +103,18 @@ public class Pet implements Serializable {
                 ", isAnabiosis=" + isAnabiosis +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return health == pet.health && hungry == pet.hungry && happiness == pet.happiness && isAnabiosis == pet.isAnabiosis && name.equals(pet.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, health, hungry, happiness, isAnabiosis);
+    }
+
 }

@@ -1,6 +1,7 @@
 package test;
 
 import org.dng.Pet;
+import org.dng.Service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -184,6 +185,13 @@ class PetTest {
         Assertions.assertEquals(healthExpected,healthAfter);
         Assertions.assertEquals(happinessExpected, happinessAfter);
 
+    }
+
+    @org.junit.jupiter.api.Test
+    void saveRead() {
+        Service.saveGame(pet);
+        Pet newPet = Service.readGame();
+        Assertions.assertTrue(pet.equals(newPet));
     }
 
 }
